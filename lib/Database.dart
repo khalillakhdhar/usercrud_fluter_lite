@@ -30,4 +30,6 @@ class DBProvider {
           ")");
     });
   }
+
+  //insert data
 }
