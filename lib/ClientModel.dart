@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 Client clientFromJson(String str) {
-  final jsonData = json.decode(str);
-  return Client.fromMap(jsonData);
+  final jsonData = json.decode(str); //récuperation de tableau données
+  return Client.fromMap(jsonData); //lire les données en Client[]
 }
 
 String clientToJson(Client data) {
