@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-//import 'package:sqliteflutter/ClientModel.dart';
+import 'package:usercrudlite/ClientModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
@@ -32,4 +32,16 @@ class DBProvider {
   }
 
   //insert data
+  newClient(Client newClient) async {
+    final db = await database;
+//get the biggest id in the table
+    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM Client");
+    int id = table.first["id"];
+//insert to the table using the new id
+    var raw = await db.rawInsert(
+        "INSERT Into Client (id,first_name,last_name,blocked)"
+        " VALUES (?,?,?,?)",
+        [id, newClient.firstName, newClient.lastName, newClient.blocked]);
+    return raw;
+  }
 }
